@@ -93,6 +93,7 @@
             }
         }
         public function search(){
+            $option='show';
             if(isset($_POST['attri'],$_POST['info'])){
                 $employees= $this->objsm->SearchEmployee($_POST['attri'],$_POST['info']);
                 include_once("../view/EmployeeList.php");
