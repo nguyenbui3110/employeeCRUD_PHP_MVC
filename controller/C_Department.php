@@ -8,6 +8,7 @@
 			$this->objsm =  new Model_Department();
 		}
         public function invoke(){
+            $option='show';
             if(isset($_GET['option'])){
                 if($_GET['option']='show'){
                     if(isset($_GET['idpb'])){

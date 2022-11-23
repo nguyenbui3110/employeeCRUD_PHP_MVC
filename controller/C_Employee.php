@@ -1,23 +1,33 @@
 <?php
     include_once("../model/E_Employee.php");
     include_once("../model/M_Employee.php");
-
+    session_start();
     class Ctrl_Employee{
         function __construct() 
 		{          
 			$this->objsm =  new Model_Employee();
 		}
         public function invoke(){
+            
             $act = isset($_GET['option']) ? $_GET['option'] : NULL;
 			switch ($act) 
 			{
-                case 'add' :                    
+                case 'add' :
+                    if(!$_SESSION['valid']){
+                        header("location:C_Admin.php?option=login");
+                    }                    
 					$this->insert();
 					break;						
 				case 'update':
+                    if(!$_SESSION['valid']){
+                        header("location:C_Admin.php?option=login");
+                    }
 					$this->update();
 					break;				
-				case 'delete' :					
+				case 'delete' :	
+                    if(!$_SESSION['valid']){
+                        header("location:C_Admin.php?option=login");
+                    }				
 					$this -> delete();
 					break;	
                 case 'search' :					
@@ -49,10 +59,15 @@
             }
         }
         public function insert(){
-            if(isset($_POST['Hoten'],$_POST['IDPB'],$_POST['Diachi'])){
-                $employee= new Entity_Employee("*",$_POST['Hoten'],'pb0'.$_POST['IDPB'],$_POST['Diachi']);
-                $this->objsm->insertRecord($employee);
-                header("location:C_Employee.php");
+            if(isset($_REQUEST['addbtn'])){
+                if(isset($_POST['Hoten'],$_POST['IDPB'],$_POST['Diachi'])){
+                    $employee= new Entity_Employee("*",$_POST['Hoten'],'pb0'.$_POST['IDPB'],$_POST['Diachi']);
+                    $this->objsm->insertRecord($employee);
+                    header("location:C_Employee.php");
+                }
+            }
+            else{
+                include_once("../view/addForm.php");
             }
         }
         public function delete(){

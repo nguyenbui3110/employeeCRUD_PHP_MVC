@@ -23,7 +23,7 @@
                 <input type="text" id="Diachi" name="Diachi" placeholder="Nhập địa chỉ...">
             </div>
             <div class="center">
-                <button type="submit">Thêm</button>
+                <button type="submit" name="addbtn">Thêm</button>
                 <button >Reset</button>
             </div>
         </form>
